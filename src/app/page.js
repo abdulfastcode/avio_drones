@@ -154,7 +154,7 @@ const sliderContent = [
   },
   {
     image: "/Xera-1.jpeg",
-    title: "XETA-1",
+    title: "XERA-1",
     learnMoreLink: "/xera-1",
   },
   // Add more slides as needed
