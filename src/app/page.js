@@ -1,113 +1,161 @@
-import Image from 'next/image'
+"use client";
+// import React from "react";
+import Link from "next/link";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import Slider from "react-slick";
+import { motion, AnimatePresence } from "framer-motion";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
+  let [showmenu, setShowMenu] = useState("hidden");
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const onClickMenu = () => {
+    showmenu === "hidden" ? setShowMenu("block") : setShowMenu("hidden");
+  };
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    afterChange: (index) => setCurrentSlide(index),
+  };
+
+  const textAnimation = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+    <>
+      <div className="w-full h-9 bg-[#fcf7db] flex gap-2 text-black items-center justify-center ">
+        <Image
+          width="30"
+          height="30"
+          src="/icons8-box-important-50.png"
+          alt="box-important--v1"
+        />
+        <div>
+          NOW{" "}
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            className="decoration-stone-800 decoration-1 underline  decoration-solid"
+            href="https://www.uavio.in/about-uavio/"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            UAVIO LABS
+          </a>{" "}
+          IS AVIO DRONES
         </div>
       </div>
+      <nav className="bg-[#000d12] w-full h-auto sm:h-[46px] sticky top-0 r-0 l-0 z-50 text-[17px]  sm:flex sm:items-center sm:justify-between">
+        <div className="mt-0 mx-auto w-full max-w-[1024px] px-[25px] pt-[2px] font-normal text-[#ffffff]">
+          <ul className=" w-full h-10 flex justify-between sm:justify-normal  items-center text-[12px] sm:gap-[10vw] select-none">
+            <li className="cursor-pointer">
+              <Image className="h-[40px] sm:h-[44px]" src="/Avio - Logo1.png" width="44" height="42" />
+            </li>
+            <li className="sm:hidden text-center text-2xl py-3 mr-[30px]">
+              <button
+                onClick={onClickMenu}
+                className="block hover:text-white focus:text-white focus:outline-none"
+              >
+                {/* <i class="fa-sharp fa-solid fa-bars" style={{ color: "#2c2c2c" }}>
+              </i> */}
+                =
+              </button>
+            </li>
+            <div className={`hidden items-center sm:flex  w-full sm:justify-between text-[12px]`}>
+              <li className={`cursor-pointer`}>Home</li>
+              <li className="cursor-pointer">About Us</li>
+              <li className="cursor-pointer">Products</li>
+              <li className="cursor-pointer">Industrial Applications</li>
+            </div>
+          </ul>
+          <div className={`${showmenu}  items-center sm:hidden sm:gap-[11px] lg:pr-[20px]  lg:gap-[32px] px-5 pb-4 xl:px-[120px] `}>
+          <Link
+            className={`block py-1 rounded  mt-1  transition-colors duration-300 `}
+            href="/"
+          >
+            Home
+          </Link>
+          <Link
+            className={`block py-1 rounded  mt-1  transition-colors duration-300 `}
+            href="/"
+          >
+            About Us
+          </Link>
+         
+          <Link
+            className={`block py-1 rounded  mt-1  transition-colors duration-300 `}
+            href="/"
+          >
+            Contact
+          </Link>
+          <Link
+            className={`block py-1 rounded  mt-1 transition-colors duration-300 `}
+            href="/"
+          >
+            Industrial Applications
+          </Link>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+         
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+          
+        </div>
+        </div>
+      </nav>
+      <main>
+        <Slider {...sliderSettings}>
+          {sliderContent.map((content, index) => (
+            <div key={index} className="relative">
+              <Image
+              alt="drone"
+                className="w-full h-[60vw] md:h-[48vw]"
+                src={content.image}
+                width="1000"
+                height="809"
+              />
+              <AnimatePresence>
+                {currentSlide === index && (
+                  <motion.div
+                    key={index}
+                    className="  absolute text-center top-[40vw] md:top-[30vw] mx-auto w-full z-10"
+                    initial="hidden"
+                    animate="visible"
+                    variants={textAnimation}
+                    exit="hidden"
+                  >
+                    <h2 className="text-[#12273b]  font-bold text-shadow text-[7vw] lg:text-[6vw]">
+                      {content.title}
+                    </h2>
+                    <div className="text-[#12273b]  font-bold text-shadow text-[2vw]">
+                      <a href={content.learnMoreLink}>Learn More </a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </Slider>
+      </main>
+    </>
+  );
 }
+
+// Sample content for each slide
+const sliderContent = [
+  {
+    image: "/Zeta-1.png",
+    title: "ZETA-1",
+    learnMoreLink: "/zeta-1",
+  },
+  {
+    image: "/Xera-1.jpeg",
+    title: "XETA-1",
+    learnMoreLink: "/xera-1",
+  },
+  // Add more slides as needed
+];
